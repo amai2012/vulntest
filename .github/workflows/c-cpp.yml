@@ -9,11 +9,19 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v2
-    - name: configure
-      run: ./configure
     - name: make
       run: make
+    - name: Build cppcheck
+      run: |
+        git clone https://github.com/danmar/cppcheck.git
+        pushd cppcheck
+        make -j$(nproc)
+        ls -la
+        popd
+    - name: run cppcheck
+      run: |
+       cppcheck/cppcheck --enable=all --inconclusive *.cpp *.c
