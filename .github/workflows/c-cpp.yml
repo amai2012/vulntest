@@ -24,4 +24,4 @@ jobs:
         popd
     - name: run cppcheck
       run: |
-       cppcheck/cppcheck --enable=all --inconclusive *.cpp *.c
+       cppcheck/cppcheck --enable=all --inconclusive --bug-hunting *.cpp *.c
